@@ -18,10 +18,16 @@ fn is_a115569(num: u32) -> bool {
         })
 }
 
+fn format_array(numbers: &[u32]) -> String {
+    let formatted_numbers: Vec<String> = numbers.iter().map(|&x| x.to_string()).collect();
+    format!("[{}]", formatted_numbers.join(", "))
+}
+
 fn main() {
     // No "Closed form" for straightforward approach so using Predicate
     // Reproducing... https://oeis.org/A115569/list
-    (1..=1900).filter(|&x| is_a115569(x)).for_each(|x| println!("{}", x));
+    let lynch_bell_numbers: Vec<u32> = (1..=1900).filter(|&x| is_a115569(x)).collect();
+    println!("{}", format_array(&lynch_bell_numbers));
 }
 
 #[cfg(test)]
